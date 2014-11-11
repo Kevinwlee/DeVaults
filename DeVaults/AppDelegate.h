@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <ContextHub/ContextHub.h>
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

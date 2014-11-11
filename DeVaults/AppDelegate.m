@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "CCHUserDefaults.h"
 
 @interface AppDelegate ()
 
@@ -17,7 +18,27 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [[ContextHub sharedInstance] setDebug:YES];
+    [ContextHub registerWithAppId:@"c583a770-8bdf-4062-883c-2fbe657ef9b7"];
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
+    
     return YES;
+}
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    [[CCHPush sharedInstance] registerDeviceToken:deviceToken alias:@"Kevin@chaione.com" tags:@[@"davault-user"] completionHandler:^(NSError *error) {
+        NSLog(@"Registered For Push");
+    }];
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    NSLog(@"Did fail to register for push %@", error);
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    [[CCHPush sharedInstance] application:application didReceiveRemoteNotification:userInfo completionHandler:^(enum UIBackgroundFetchResult result, CCHContextHubPush *contextHubPush) {
+        completionHandler(result);
+    }];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
