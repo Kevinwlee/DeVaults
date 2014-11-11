@@ -70,6 +70,16 @@
     [self.upgradeButton setTitle:@"Upgraded" forState:UIControlStateNormal];
 }
 
+- (IBAction)sendPushTapped:(id)sender {
+    [[CCHPush sharedInstance] sendNotificationToTags:@[@"davault-user"] userInfo:@{@"alert":@"Hello World!"} completionHandler:^(NSError *error) {
+        if (error) {
+            NSLog(@"error: %@", error);
+        } else {
+            NSLog(@"No Error to Tags");
+        }        
+    }];
+}
+
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }

@@ -19,14 +19,23 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [[ContextHub sharedInstance] setDebug:YES];
-    [ContextHub registerWithAppId:@"c583a770-8bdf-4062-883c-2fbe657ef9b7"];
-    [[UIApplication sharedApplication] registerForRemoteNotifications];
+    [ContextHub registerWithAppId:@"2a9f7f52-1dfa-40cd-b8a0-e0b04a703b5e"];
     
+    
+    UIUserNotificationType notificationTypes = UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound;
+    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:notificationTypes categories:nil];
+    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
     return YES;
 }
 
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
+    NSLog(@"Did register notifications settings");
+}
+
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    [[CCHPush sharedInstance] registerDeviceToken:deviceToken alias:@"Kevin@chaione.com" tags:@[@"davault-user"] completionHandler:^(NSError *error) {
+    [[CCHPush sharedInstance] registerDeviceToken:deviceToken alias:@"kevin@chaione.com" tags:@[@"davault-user"] completionHandler:^(NSError *error) {
         NSLog(@"Registered For Push");
     }];
 }
@@ -38,6 +47,7 @@
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     [[CCHPush sharedInstance] application:application didReceiveRemoteNotification:userInfo completionHandler:^(enum UIBackgroundFetchResult result, CCHContextHubPush *contextHubPush) {
         completionHandler(result);
+        NSLog(@"Did get push %@", userInfo);
     }];
 }
 
