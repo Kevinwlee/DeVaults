@@ -14,6 +14,7 @@
 
 + (instancetype)sharedInstance;
 
-- (void)fetchDefaultsWithCompletion:(void(^)(NSUserDefaults *d, NSError *error))completionHandler;
+- (void)fetchDefaultsWithCompletion:(void(^)(NSUserDefaults *defaults, NSError *error))completionHandler;
+- (void)updateDefaultsWithPush:(CCHContextHubPush *)contextHubPush completion:(void(^)())completionHandler;
 
 @end

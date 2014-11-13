@@ -8,6 +8,7 @@
 
 #import "CCHUserDefaults.h"
 #define kVaultDefaultsKey @"_ch_vault_default"
+#define kDefaultPlist @"CCHDefaults"
 
 @implementation CCHUserDefaults
 
@@ -26,32 +27,33 @@
     self = [super init];
     
     if (self) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleApplicationLaunching) name:UIApplicationDidFinishLaunchingNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleApplicationLaunching) name:UIApplicationWillEnterForegroundNotification object:nil];
+        //Subscription for DeVault Tag
         [[CCHSubscriptionService sharedInstance] addSubscriptionsForTags:@[kVaultDefaultsKey] options:@[CCHOptionVault] completionHandler:^(NSError *error) {
             
         }];
         
+        //Listen for changes to the DeVault Data
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleVaultUpdate:) name:CCHVaultItemUpdatedNotification object:nil];
+
         [self loadDefaultsFromDisk];
     }
+
     return self;
 }
 
 - (void)loadDefaultsFromDisk {
     
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"CCHDefaults" ofType:@"plist"];
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:kDefaultPlist ofType:@"plist"];
     NSDictionary *dict = [[NSDictionary alloc] initWithContentsOfFile:filePath];
 
     if (dict) {
+        //Register populates a "temp" in memory version of NSUserDefaults
         [[NSUserDefaults standardUserDefaults] registerDefaults:dict];
     }
 }
 
-- (void)handleApplicationLaunching {
-    [self fetchDefaultsWithCompletion:nil];
-}
 
-- (void)fetchDefaultsWithCompletion:(void(^)(NSUserDefaults *d, NSError *error))completionHandler {
+- (void)fetchDefaultsWithCompletion:(void(^)(NSUserDefaults *defaults, NSError *error))completionHandler {
     
     CCHVault *vault  = [CCHVault sharedInstance];
 
@@ -59,7 +61,7 @@
 
         NSUserDefaults *userDefaults =[NSUserDefaults standardUserDefaults];
         
-        //Loop all the responses and set the keys, order is not guarenteed
+        //Loop all the responses and set the keys
         for (NSDictionary *dataDictionary in responses) {
             NSDictionary *vaultDefaults = [dataDictionary objectForKey:@"data"];
             [userDefaults setValuesForKeysWithDictionary:vaultDefaults];
@@ -73,6 +75,51 @@
         }
         
     }];
+}
+
+- (void)updateDefaultsWithPush:(CCHContextHubPush *)contextHubPush completion:(void(^)())completionHandler {
+    
+    NSString *resource = [contextHubPush.userInfo valueForKey:@"resource"];
+
+    if ([resource isEqualToString:@"Vault"]) {
+        NSArray *tags = [contextHubPush.object valueForKeyPath:@"vault_info.tags"];
+        
+        if ([tags containsObject:kVaultDefaultsKey]) {
+            NSUserDefaults *userDefaults =[NSUserDefaults standardUserDefaults];
+            
+            NSDictionary *vaultDefaults = [contextHubPush.object objectForKey:@"data"];
+            [userDefaults setValuesForKeysWithDictionary:vaultDefaults];
+            
+            //write to disk!
+            [userDefaults synchronize];
+            
+            if (completionHandler) {
+                completionHandler();
+            }
+
+        } else {
+            //Not a default change
+            if (completionHandler) {
+                completionHandler();
+            }
+        }
+    } else {
+        completionHandler();
+    }
+}
+
+- (void)handleVaultUpdate:(NSNotification *)notification {
+    
+    NSArray *tags = [notification.object valueForKeyPath:@"vault_info.tags"];
+    if ([tags containsObject:kVaultDefaultsKey]) {
+        NSUserDefaults *userDefaults =[NSUserDefaults standardUserDefaults];
+        
+        NSDictionary *vaultDefaults = [notification.object objectForKey:@"data"];
+        [userDefaults setValuesForKeysWithDictionary:vaultDefaults];
+        
+        //write to disk!
+        [userDefaults synchronize];
+    }
 }
 
 - (void)dealloc {

@@ -18,15 +18,20 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
     [[ContextHub sharedInstance] setDebug:YES];
     [ContextHub registerWithAppId:@"2a9f7f52-1dfa-40cd-b8a0-e0b04a703b5e"];
     
-    
-    UIUserNotificationType notificationTypes = UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound;
-    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:notificationTypes categories:nil];
-    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
-    
     [[UIApplication sharedApplication] registerForRemoteNotifications];
+    
+    //Update Defaults using DeVaults Class
+    [[CCHUserDefaults sharedInstance] fetchDefaultsWithCompletion:^(NSUserDefaults *defaults, NSError *error) {
+        NSLog(@"Defaults %@", defaults);
+        if (error) {
+            NSLog(@"Error %@", error);
+        }
+    }];
+    
     return YES;
 }
 
@@ -35,7 +40,7 @@
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    [[CCHPush sharedInstance] registerDeviceToken:deviceToken alias:@"kevin@chaione.com" tags:@[@"davault-user"] completionHandler:^(NSError *error) {
+    [[CCHPush sharedInstance] registerDeviceToken:deviceToken alias:@"kevin@chaione.com" tags:@[@"devault-user"] completionHandler:^(NSError *error) {
         NSLog(@"Registered For Push");
     }];
 }
@@ -46,7 +51,10 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     [[CCHPush sharedInstance] application:application didReceiveRemoteNotification:userInfo completionHandler:^(enum UIBackgroundFetchResult result, CCHContextHubPush *contextHubPush) {
-        completionHandler(result);
+        // Handle defaults in background
+        [[CCHUserDefaults sharedInstance] updateDefaultsWithPush:contextHubPush completion:^{
+            completionHandler(result);
+        }];
         NSLog(@"Did get push %@", userInfo);
     }];
 }
