@@ -20,7 +20,7 @@
     // Override point for customization after application launch.
     
     [[ContextHub sharedInstance] setDebug:YES];
-    [ContextHub registerWithAppId:@"e70fac9c-1edd-43cd-b446-1b65d98892e2"];
+    [ContextHub registerWithAppId:@"2a9f7f52-1dfa-40cd-b8a0-e0b04a703b5e"];
     
     [[UIApplication sharedApplication] registerForRemoteNotifications];
     
@@ -30,9 +30,7 @@
     return YES;
 }
 
-- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
-    NSLog(@"Did register notifications settings");
-}
+#pragma mark - Push Registration Callback
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     [[CCHPush sharedInstance] registerDeviceToken:deviceToken alias:@"kevin@chaione.com" tags:@[@"devault-user"] completionHandler:^(NSError *error) {
@@ -44,6 +42,8 @@
     NSLog(@"Did fail to register for push %@", error);
 }
 
+#pragma mark - Remote Notification
+
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     [[CCHPush sharedInstance] application:application didReceiveRemoteNotification:userInfo completionHandler:^(enum UIBackgroundFetchResult result, CCHContextHubPush *contextHubPush) {
         // Handle defaults in background
@@ -53,6 +53,8 @@
         NSLog(@"Did get push %@", userInfo);
     }];
 }
+
+#pragma mark - Life Cycle
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
