@@ -15,11 +15,9 @@
 		3DCE98F61A0D186E0096BEB1 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DCE98F41A0D186E0096BEB1 /* LaunchScreen.xib */; };
 		3DCE99021A0D186E0096BEB1 /* DeVaultsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCE99011A0D186E0096BEB1 /* DeVaultsTests.m */; };
 		3DCE990C1A0D19240096BEB1 /* ContextHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DCE990B1A0D19240096BEB1 /* ContextHub.framework */; };
-		3DCE990E1A0D19810096BEB1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DCE990D1A0D19810096BEB1 /* CoreLocation.framework */; };
-		3DCE99111A0D19C20096BEB1 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DCE99101A0D19C20096BEB1 /* MobileCoreServices.framework */; };
-		3DCE99131A0D19DF0096BEB1 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DCE99121A0D19DF0096BEB1 /* CoreBluetooth.framework */; };
 		3DCE99161A0D1A670096BEB1 /* CCHUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCE99151A0D1A670096BEB1 /* CCHUserDefaults.m */; };
 		3DCE99181A0D5C800096BEB1 /* CCHDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3DCE99171A0D5C800096BEB1 /* CCHDefaults.plist */; };
+		3DF9BC7F1A1550AC0079BBCF /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DF9BC7E1A1550AC0079BBCF /* MobileCoreServices.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,12 +45,10 @@
 		3DCE99001A0D186E0096BEB1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3DCE99011A0D186E0096BEB1 /* DeVaultsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeVaultsTests.m; sourceTree = "<group>"; };
 		3DCE990B1A0D19240096BEB1 /* ContextHub.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ContextHub.framework; path = "../../contexthub/contexthub-ios-sdk/Framework/ContextHub.framework"; sourceTree = "<group>"; };
-		3DCE990D1A0D19810096BEB1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		3DCE99101A0D19C20096BEB1 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
-		3DCE99121A0D19DF0096BEB1 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		3DCE99141A0D1A670096BEB1 /* CCHUserDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCHUserDefaults.h; sourceTree = "<group>"; };
 		3DCE99151A0D1A670096BEB1 /* CCHUserDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCHUserDefaults.m; sourceTree = "<group>"; };
 		3DCE99171A0D5C800096BEB1 /* CCHDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CCHDefaults.plist; sourceTree = "<group>"; };
+		3DF9BC7E1A1550AC0079BBCF /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,9 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3DCE99131A0D19DF0096BEB1 /* CoreBluetooth.framework in Frameworks */,
-				3DCE99111A0D19C20096BEB1 /* MobileCoreServices.framework in Frameworks */,
-				3DCE990E1A0D19810096BEB1 /* CoreLocation.framework in Frameworks */,
+				3DF9BC7F1A1550AC0079BBCF /* MobileCoreServices.framework in Frameworks */,
 				3DCE990C1A0D19240096BEB1 /* ContextHub.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -143,9 +137,7 @@
 		3DCE990F1A0D199A0096BEB1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3DCE99121A0D19DF0096BEB1 /* CoreBluetooth.framework */,
-				3DCE99101A0D19C20096BEB1 /* MobileCoreServices.framework */,
-				3DCE990D1A0D19810096BEB1 /* CoreLocation.framework */,
+				3DF9BC7E1A1550AC0079BBCF /* MobileCoreServices.framework */,
 				3DCE990B1A0D19240096BEB1 /* ContextHub.framework */,
 			);
 			name = Frameworks;

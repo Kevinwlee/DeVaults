@@ -20,17 +20,12 @@
     // Override point for customization after application launch.
     
     [[ContextHub sharedInstance] setDebug:YES];
-    [ContextHub registerWithAppId:@"2a9f7f52-1dfa-40cd-b8a0-e0b04a703b5e"];
+    [ContextHub registerWithAppId:@"e70fac9c-1edd-43cd-b446-1b65d98892e2"];
     
     [[UIApplication sharedApplication] registerForRemoteNotifications];
     
-    //Update Defaults using DeVaults Class
-    [[CCHUserDefaults sharedInstance] fetchDefaultsWithCompletion:^(NSUserDefaults *defaults, NSError *error) {
-        NSLog(@"Defaults %@", defaults);
-        if (error) {
-            NSLog(@"Error %@", error);
-        }
-    }];
+    //Fetch Defaults using DeVaults Class
+    [[CCHUserDefaults sharedInstance] fetchDefaultsWithCompletion:nil];
     
     return YES;
 }
