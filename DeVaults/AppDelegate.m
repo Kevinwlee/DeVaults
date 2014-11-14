@@ -25,6 +25,7 @@
     [[UIApplication sharedApplication] registerForRemoteNotifications];
     
     //Fetch Defaults using DeVaults Class
+    
     [[CCHUserDefaults sharedInstance] fetchDefaultsWithCompletion:nil];
     
     return YES;

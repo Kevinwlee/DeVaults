@@ -27,11 +27,6 @@
     self = [super init];
     
     if (self) {
-        //Subscription for DeVault Tag
-        [[CCHSubscriptionService sharedInstance] addSubscriptionsForTags:@[kVaultDefaultsKey] options:@[CCHOptionVault] completionHandler:^(NSError *error) {
-            
-        }];
-        
         //Listen for changes to the DeVault Data
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleVaultUpdate:) name:CCHVaultItemUpdatedNotification object:nil];
 
@@ -43,6 +38,11 @@
 
 - (void)loadDefaultsFromDisk {
     
+    //Subscription for DeVault Tag
+    [[CCHSubscriptionService sharedInstance] addSubscriptionsForTags:@[kVaultDefaultsKey] options:@[CCHOptionVault] completionHandler:^(NSError *error) {
+        
+    }];
+    
     NSString *filePath = [[NSBundle mainBundle] pathForResource:kDefaultPlist ofType:@"plist"];
     NSDictionary *dict = [[NSDictionary alloc] initWithContentsOfFile:filePath];
 
@@ -50,6 +50,7 @@
         //Register populates a "temp" in memory version of NSUserDefaults
         [[NSUserDefaults standardUserDefaults] registerDefaults:dict];
     }
+
 }
 
 

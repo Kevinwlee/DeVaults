@@ -10,16 +10,16 @@
 #import "CCHUserDefaults.h"
 
 @interface ViewController ()
+
+@property (nonatomic, strong) NSString *currentVersion;
+
 @property (weak, nonatomic) IBOutlet UILabel *label1;
 @property (weak, nonatomic) IBOutlet UILabel *label2;
 @property (weak, nonatomic) IBOutlet UILabel *label3;
 @property (weak, nonatomic) IBOutlet UILabel *label4;
 @property (weak, nonatomic) IBOutlet UILabel *label5;
 @property (weak, nonatomic) IBOutlet UILabel *label6;
-
 @property (weak, nonatomic) IBOutlet UIButton *upgradeButton;
-
-@property (nonatomic, strong) NSString *currentVersion;
 
 @end
 
@@ -27,14 +27,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.currentVersion = @"1";
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleDefaultsChanged:) name:NSUserDefaultsDidChangeNotification object:nil];
+    
     [self layoutLablesWithDefaults:[NSUserDefaults standardUserDefaults]];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)handleDefaultsChanged:(NSNotification *)notification {
@@ -83,4 +81,9 @@
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
 @end
