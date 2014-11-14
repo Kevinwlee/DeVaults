@@ -20,7 +20,7 @@
     // Override point for customization after application launch.
     
     [[ContextHub sharedInstance] setDebug:YES];
-    [ContextHub registerWithAppId:@"2a9f7f52-1dfa-40cd-b8a0-e0b04a703b5e"];
+    [ContextHub registerWithAppId:@"64e074f5-ae48-4f13-834a-4e2cafe9a2fe"];
     
     [[UIApplication sharedApplication] registerForRemoteNotifications];
     

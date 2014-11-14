@@ -14,10 +14,10 @@
 		3DCE98F31A0D186E0096BEB1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3DCE98F21A0D186E0096BEB1 /* Images.xcassets */; };
 		3DCE98F61A0D186E0096BEB1 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DCE98F41A0D186E0096BEB1 /* LaunchScreen.xib */; };
 		3DCE99021A0D186E0096BEB1 /* DeVaultsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCE99011A0D186E0096BEB1 /* DeVaultsTests.m */; };
-		3DCE990C1A0D19240096BEB1 /* ContextHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DCE990B1A0D19240096BEB1 /* ContextHub.framework */; };
 		3DCE99161A0D1A670096BEB1 /* CCHUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCE99151A0D1A670096BEB1 /* CCHUserDefaults.m */; };
 		3DCE99181A0D5C800096BEB1 /* CCHDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3DCE99171A0D5C800096BEB1 /* CCHDefaults.plist */; };
 		3DF9BC7F1A1550AC0079BBCF /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DF9BC7E1A1550AC0079BBCF /* MobileCoreServices.framework */; };
+		3DF9BC811A16422D0079BBCF /* ContextHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DF9BC801A16422D0079BBCF /* ContextHub.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,11 +44,11 @@
 		3DCE98FB1A0D186E0096BEB1 /* DeVaultsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DeVaultsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DCE99001A0D186E0096BEB1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3DCE99011A0D186E0096BEB1 /* DeVaultsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeVaultsTests.m; sourceTree = "<group>"; };
-		3DCE990B1A0D19240096BEB1 /* ContextHub.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ContextHub.framework; path = "../../contexthub/contexthub-ios-sdk/Framework/ContextHub.framework"; sourceTree = "<group>"; };
 		3DCE99141A0D1A670096BEB1 /* CCHUserDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCHUserDefaults.h; sourceTree = "<group>"; };
 		3DCE99151A0D1A670096BEB1 /* CCHUserDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCHUserDefaults.m; sourceTree = "<group>"; };
 		3DCE99171A0D5C800096BEB1 /* CCHDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CCHDefaults.plist; sourceTree = "<group>"; };
 		3DF9BC7E1A1550AC0079BBCF /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		3DF9BC801A16422D0079BBCF /* ContextHub.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ContextHub.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,8 +56,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3DF9BC811A16422D0079BBCF /* ContextHub.framework in Frameworks */,
 				3DF9BC7F1A1550AC0079BBCF /* MobileCoreServices.framework in Frameworks */,
-				3DCE990C1A0D19240096BEB1 /* ContextHub.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,8 +137,8 @@
 		3DCE990F1A0D199A0096BEB1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3DF9BC801A16422D0079BBCF /* ContextHub.framework */,
 				3DF9BC7E1A1550AC0079BBCF /* MobileCoreServices.framework */,
-				3DCE990B1A0D19240096BEB1 /* ContextHub.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -382,6 +382,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/kevinlee/contexthub/contexthub-ios-sdk/Framework",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = DeVaults/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -397,6 +398,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/kevinlee/contexthub/contexthub-ios-sdk/Framework",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = DeVaults/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

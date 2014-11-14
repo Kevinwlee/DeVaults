@@ -57,7 +57,7 @@
     
     CCHVault *vault  = [CCHVault sharedInstance];
 
-    [vault getItemsWithTags:@[kVaultDefaultsKey] operator:nil keyPath:nil value:nil completionHandler:^(NSArray *responses, NSError *error) {
+    [vault getItemsWithTags:@[kVaultDefaultsKey] keyPath:nil value:nil completionHandler:^(NSArray *responses, NSError *error) {
 
         NSUserDefaults *userDefaults =[NSUserDefaults standardUserDefaults];
         
